@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#182b29">
+    <meta name="description" content="Чат с языковой моделью.">
+    <link rel="stylesheet" href="/styles.css?v=20261122-3">
+    <script src="/app.js?v=20261122-6" defer></script>
+    <title>Чат с AI</title>
+</head>
+<body>
+    <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <symbol id="icon-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+    </svg>
+
+    <section id="login-view" class="login-view" aria-labelledby="login-title">
+        <div class="login-panel">
+            <div class="login-card">
+                <h1 id="login-title">Вход в чат</h1>
+                <form id="login-form">
+                    <label for="api-key">Ключ доступа</label>
+                    <div class="key-field">
+                        <input id="api-key" name="api_key" type="password" minlength="8" maxlength="255" pattern="[A-Za-z0-9_\-]{8,255}" aria-describedby="key-hint login-message" placeholder="Введите ваш ключ" autocomplete="off" spellcheck="false" autocapitalize="none" required>
+                        <button id="toggle-key" class="icon-button" type="button" aria-label="Показать ключ" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#icon-eye"/></svg></button>
+                    </div>
+                    <p id="key-hint" class="field-hint">8–255 символов: латиница, цифры, дефис и подчёркивание.</p>
+                    <button id="generate-key-button" class="generate-key-button" type="button">Получить ключ</button>
+                    <p id="key-status" class="key-status" role="status"></p>
+                    <p id="login-message" class="form-error" role="alert"></p>
+                    <button id="login-button" class="primary-button login-button" type="submit" disabled>Войти</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <div id="chat-view" class="chat-view" hidden>
+        <main class="chat-main">
+            <header class="chat-header">
+                <h1 class="chat-title">Чат с AI</h1>
+                <div class="header-actions"><span id="connection-status" class="connection-status" data-state="connecting" role="status">Подключаемся</span><button id="logout-button" class="quiet-button" type="button">Выйти</button></div>
+            </header>
+            <div id="conversation" class="conversation" tabindex="0" aria-label="История диалога">
+                <div id="empty-state" class="empty-state">
+                    <p>Пока нет сообщений</p>
+                </div>
+                <div id="messages" class="messages" role="log" aria-label="Сообщения" aria-live="polite" aria-relevant="additions"></div>
+                <div id="thinking" class="thinking" role="status" hidden><span class="thinking-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>Модель отвечает…</span></div>
+            </div>
+            <div class="composer-area">
+                <div id="chat-error" class="chat-error" role="alert" hidden><span id="chat-error-text"></span><button id="reconnect-button" class="quiet-button" type="button" hidden>Подключиться</button></div>
+                <form id="message-form" class="composer">
+                    <label class="sr-only" for="message-input">Ваше сообщение</label>
+                    <textarea id="message-input" placeholder="Сообщение…" rows="2" maxlength="500" aria-describedby="composer-hint character-count" disabled></textarea>
+                    <div class="composer-toolbar"><span id="composer-hint">Enter — отправить<span class="desktop-hint"> · Shift + Enter — перенос</span></span><div class="send-tools"><span id="character-count">0 / 500</span><button id="send-button" class="primary-button" type="submit" disabled>Отправить</button></div></div>
+                </form>
+            </div>
+        </main>
+    </div>
+    <noscript><p class="noscript">Для работы чата включите JavaScript в браузере.</p></noscript>
+</body>
+</html>
